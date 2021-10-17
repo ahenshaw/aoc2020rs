@@ -21,7 +21,7 @@ pub fn solve_part1(input: &[Input]) -> u32 {
 
 #[aoc(day5, part2)]
 pub fn solve_part2(input: &[Input]) -> u32 {
-    let visible: HashSet<u32> = input.iter().map(|&x| x).collect();
+    let visible: HashSet<u32> = input.iter().copied().collect();
     let max = *input.iter().max().unwrap();
     let all: HashSet<u32> = (1..max).collect();
     for &missing in all.difference(&visible) {

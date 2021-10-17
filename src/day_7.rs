@@ -37,11 +37,11 @@ pub fn solve_part1(input: &[Input]) -> usize {
     bags.len()
 }
 
-fn all_parents(parents: &HashMap::<String, HashSet<String>>, bag: &String, mut bags: HashSet<String>)  -> HashSet<String> {
+fn all_parents(parents: &HashMap::<String, HashSet<String>>, bag: &str, mut bags: HashSet<String>)  -> HashSet<String> {
     if let Some(parent_set) = parents.get(bag) {
         for parent in parent_set {
             bags.insert(parent.clone());
-            bags = all_parents(&parents, parent, bags);
+            bags = all_parents(parents, parent, bags);
         }
     }
     bags

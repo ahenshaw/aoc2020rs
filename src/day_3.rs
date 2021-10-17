@@ -28,7 +28,7 @@ fn num_trees(input: &[Input], dx: &usize, dy: &usize) -> u32 {
     let mut row: usize = 0;
     let mut count = 0u32;
     while row < input.len() {
-        col = col % input[row].len();
+        col %= input[row].len();
         count += (input[row][col] == '#') as u32;
         col += dx;
         row += dy;

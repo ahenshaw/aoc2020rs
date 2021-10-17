@@ -8,7 +8,7 @@ type Input = std::collections::HashMap<String, String>;
 pub fn input_generator(input: &str) -> Vec<Input> {
     input.split("\n\n").map(|record| {
         record.split_ascii_whitespace().map(|item| {
-            item.splitn(2, ":")
+            item.splitn(2, ':')
             .map(|s| s.to_owned())
             .next_tuple().unwrap()
         }).filter(|(key, _)| key != "cid"). collect()
@@ -25,7 +25,7 @@ pub fn solve_part1(input: &[Input]) -> usize {
 #[aoc(day4, part2)]
 pub fn solve_part2(input: &[Input]) -> usize {
     input.iter().filter(|r| {
-       byr(&r) && iyr(&r) && eyr(&r) && hcl(&r) && pid(&r) && ecl(&r) && hgt(&r)
+       byr(r) && iyr(r) && eyr(r) && hcl(r) && pid(r) && ecl(r) && hgt(r)
     }).count()
 }
 
@@ -33,7 +33,7 @@ fn byr(input: &Input) -> bool {
     match input.get("byr").cloned() {
         Some(field) => {
             match field.parse::<u32>() {
-                Ok(x) => x >= 1920 && x <= 2002,
+                Ok(x) => (1920..=2002).contains(&x),
                 _ => false,
             }
         },
@@ -45,7 +45,7 @@ fn iyr(input: &Input) -> bool {
     match input.get("iyr").cloned() {
         Some(field) => {
             match field.parse::<u32>() {
-                Ok(x) => x >= 2010 && x <= 2020,
+                Ok(x) => (2010..=2020).contains(&x),
                 _ => false,
             }
         },
@@ -57,7 +57,7 @@ fn eyr(input: &Input) -> bool {
     match input.get("eyr").cloned() {
         Some(field) => {
             match field.parse::<u32>() {
-                Ok(x) => x >= 2020 && x <= 2030,
+                Ok(x) => (2020..=2030).contains(&x),
                 _ => false,
             }
         },
@@ -98,8 +98,8 @@ fn hgt(input: &Input) -> bool {
                 Some(cap) => {
                     let x = cap.name("x").unwrap().as_str().parse::<u32>().unwrap();
                     match cap.name("unit").unwrap().as_str() {
-                        "in" => x >=59 && x <= 76,
-                        "cm" => x >= 150 && x <= 193,
+                        "in" => (59..=76).contains(&x),
+                        "cm" => (150..=193).contains(&x),
                         _ => false,
                     }
                 },

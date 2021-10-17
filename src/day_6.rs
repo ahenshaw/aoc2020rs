@@ -28,8 +28,8 @@ pub fn solve_part2(input: &[Input]) -> usize {
         let mut acc: HashSet<&char> = group[0].iter().collect();
         group[1..].iter()
             .for_each(|line| {
-                let lineset: HashSet<&char> = line.into_iter().collect();
-                acc = acc.intersection(&lineset).map(|&x| x).collect();
+                let lineset: HashSet<&char> = line.iter().collect();
+                acc = acc.intersection(&lineset).copied().collect();
             });
         acc.len()
     }).sum()

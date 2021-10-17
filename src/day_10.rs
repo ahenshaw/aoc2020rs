@@ -20,8 +20,13 @@ pub fn solve_part1(input: &[Input]) -> usize {
 }
 
 #[aoc(day10, part2)]
-pub fn solve_part2(input: &[Input]) -> u32 {
-    for a in input {
-    }
-    0
+pub fn solve_part2(input: &[Input]) -> usize {
+    let mut chain: Vec<&usize> = sorted(input).collect();
+    chain.insert(0, &0);
+    let diff: Vec<usize> = chain.iter().tuple_windows::<(_,_)>().map(|(&a, &b)| *b - *a).collect();
+    diff.split(|x| *x==3)
+        .map(|x| x.len())
+        .filter(|x| *x > 1)//.collect::<Vec<usize>>());
+        .map(|x| (1 << (x-1) as usize) - (x>3) as usize)
+        .product()
 }

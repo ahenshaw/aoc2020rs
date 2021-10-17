@@ -27,7 +27,7 @@ pub fn solve_part1(input: &[Input]) -> i32 {
 #[aoc(day8, part2)]
 pub fn solve_part2(input: &[Input]) -> i32 {
     for i in 0..input.len() {
-        if let Termination::Normal(acc) = runcode(&input, i as i32) {
+        if let Termination::Normal(acc) = runcode(input, i as i32) {
             return acc
         }
     }
